@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine's Proposal</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            margin-top: 50px;
+            background-color: pink;
+        }
+        h1 {
+            font-size: 2em;
+        }
+        .btn {
+            font-size: 20px;
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+        }
+        #yes {
+            background-color: lightgreen;
+        }
+        #no {
+            background-color: red;
+            color: white;
+        }
+        .heart {
+            position: absolute;
+            color: red;
+            font-size: 24px;
+            animation: float 2s ease-in infinite;
+        }
+        @keyframes float {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(-100px); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <h1>Will you be my Valentine?</h1>
+    <button id="yes" class="btn" onclick="showHearts()">Yes</button>
+    <button id="no" class="btn" onclick="resizeYes()">No</button>
+    <h2 id="message" style="display: none;">Thank you for choosing me! 💖</h2>
+    <p>To share this page via Google Drive, save this file and upload it to your Google Drive. Then, right-click on the file, select "Get link," and choose "Anyone with the link" to share.</p>
+    <script>
+        let noClicks = 0;
+        function resizeYes() {
+            noClicks++;
+            let yesBtn = document.getElementById("yes");
+            yesBtn.style.fontSize = (20 + noClicks * 10) + "px";
+            if (noClicks >= 2) {
+                document.getElementById("no").style.display = "none";
+            }
+        }
+        function showHearts() {
+            document.getElementById("message").style.display = "block";
+            for (let i = 0; i < 10; i++) {
+                let heart = document.createElement("div");
+                heart.className = "heart";
+                heart.innerHTML = "❤️";
+                heart.style.left = Math.random() * window.innerWidth + "px";
+                heart.style.top = Math.random() * window.innerHeight + "px";
+                document.body.appendChild(heart);
+                setTimeout(() => heart.remove(), 2000);
+            }
+        }
+    </script>
+</body>
+</html>
